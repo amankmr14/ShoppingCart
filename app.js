@@ -43,7 +43,6 @@ app.post('/adminLogin',parser.json(),async function (req,res)
 const client = new mongo(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 client.connect();
 var t=await client.db(req.body.db).collection('data').findOne({id:req.body.mail,password:req.body.password});
-console.log(t);
 admin=t;
 return t;
 }
@@ -66,12 +65,10 @@ client.connect();
 var t=await client.db(req.body.db).collection('data').findOneAndUpdate({password:req.body.old},{$set:{password:req.body.new}},{returnOriginal:false});
 if(t.value==null)
 {
-	console.log('here');
 	res.json({l:'Old Password Is not Correct'});
 }
 else
 {
-    console.log('There');
     res.json({l:'Password changed SucessFully'});	
 }
 });
@@ -156,7 +153,6 @@ app.post('/userLogin',parser.json(),async function (req,res)
 const client = new mongo(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 client.connect();
 var t=await client.db(req.body.db).collection('data').findOne({id:req.body.mail,password:req.body.password});
-console.log(t);
 user=t;
 cart=new Set();
   res.json({k:t});
@@ -199,8 +195,6 @@ app.post('/deleteItem',parser.json(),async function(req,res)
             cart.delete(i);
         }
     }
-    console.log('here');
-    console.log(cart);
    res.json({k:null});
 });
 
@@ -218,7 +212,6 @@ client.connect();
  else
  {
     var m=await client.db(req.body.db).collection('data').findOneAndUpdate({name:req.body.name},{$set:{q:s.q-parseInt(req.body.q)}},{returnOriginal:false});
-    console.log(m);
     res.json({k:true});
  }
 

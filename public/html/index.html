@@ -3,6 +3,9 @@
 <head>
 	<title></title>
 	<style>
+		body{
+			 background-color:  #87cefa;
+		}
 		#div1{
 			-webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
             -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
@@ -12,7 +15,7 @@
             position:fixed;
             top:0vh;
             left: 0vw;
-            background-color: white;
+            background-color:#D3D3D3 ;
             z-index: 5;
 		}
 		h1{
@@ -68,13 +71,13 @@
 		}
 		.item{
 			
-
-             -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
-             -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
-              box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+         -webkit-box-shadow: -1px 0px 5px 0px rgba(2,0,0,0.75);
+         -moz-box-shadow: -1px 0px 5px 0px rgba(2,0,0,0.75);
+         box-shadow: -1px 0px 5px 0px rgba(2,0,0,0.75);
               width: 72vw;
               height: 70vh;
-              border: 1px dotted blue;
+              background-color: white;
+             
             }
            .image1
            {
@@ -107,36 +110,21 @@
            	width:23vw;
            	height:30vh;
            } 
-           .price
+           .list
            {
            		position: relative;
-           		left:0vw;
+           		left:50vw;
            		top:-65vh;
            		font-size: 3vh;
            		
            		color: black;
            		}
 
-        .discription{
-        	   position: relative;
-           		left:-5.5vw;
-           		top:-60vh;
-           		font-size: 3vh;
-           		
-           		color: black;
-        }
-         .quantity{
-        	   position: relative;
-           		left:-16vw;
-           		top:-50vh;
-           		font-size: 3vh;
-           		
-           		color: black;
-        }
+
          .button{
         	   position: relative;
-           		left:46vw;
-           		top:-40vh;
+           		left:52vw;
+           		top:-60vh;
            		font-size: 3vh;
            		border-radius: 1px;
            		background-color: red;
@@ -179,6 +167,7 @@
 			left:20vw;
 			top:30vh;
 			}
+
 	</style>	
 </head>
 <body onload="load()">
@@ -229,6 +218,10 @@
             var name=document.getElementById('username');
             name.style.display='initial';
             name.innerText=js.k.id;
+           if(js.k.profileImage!=null)
+            {
+            	document.getElementById('profilePicture').src='./images/'+js.k.profileImage;
+            }
 
         }
 		object={
@@ -275,21 +268,25 @@
         	
         	div.appendChild(i4);
 
-        	var price=document.createElement('label');
-        	price.setAttribute('class','price');
+        	var list=document.createElement('ul');
+        	list.setAttribute('class','list');
+        	var price=document.createElement('li');
         	price.innerText='Price : '+i.p;
-        	div.appendChild(price);
+        	list.appendChild(price);
 
-            
-        	var discription=document.createElement('label');
-        	discription.setAttribute('class','discription');
+        	var discription=document.createElement('li');
         	discription.innerText='Discription : '+i.description;
-        	div.appendChild(discription);
+        	list.appendChild(discription);
 
-        	var quantity=document.createElement('label');
-        	quantity.setAttribute('class','quantity');
-        	quantity.innerText='Quantity : '+i.q;
-        	div.appendChild(quantity);
+
+            var quantity=document.createElement('li');
+            quantity.innerText='Quantity : '+i.q;
+            list.appendChild(quantity);
+
+
+        	div.appendChild(list);
+
+        	
 
         	var button=document.createElement('button');
         	button.innerText='Add to Cart';
@@ -304,7 +301,11 @@
         	button.setAttribute('onclick',`addCart(${j})`);
              }
         	div.appendChild(button);
-
+            
+            var br=document.createElement('br');
+            items.appendChild(br);
+            br=document.createElement('br');
+            items.appendChild(br);
         	items.appendChild(div);
             j=j+1;
         }
